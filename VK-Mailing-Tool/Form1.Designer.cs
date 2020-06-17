@@ -33,15 +33,16 @@
             this.textBox = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.attachmentsBox = new System.Windows.Forms.RichTextBox();
             this.variblesSupportBox = new System.Windows.Forms.CheckBox();
             this.messagesCountBox = new System.Windows.Forms.DomainUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.variblesSupportHelp = new System.Windows.Forms.LinkLabel();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.startButton = new System.Windows.Forms.Button();
-            this.attachmentsBox = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sendedMessagesLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stopButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -93,6 +94,16 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Вложения";
+            // 
+            // attachmentsBox
+            // 
+            this.attachmentsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.attachmentsBox.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.attachmentsBox.Location = new System.Drawing.Point(6, 19);
+            this.attachmentsBox.Name = "attachmentsBox";
+            this.attachmentsBox.Size = new System.Drawing.Size(188, 183);
+            this.attachmentsBox.TabIndex = 4;
+            this.attachmentsBox.Text = "wall-194957860_212\nmarket-194957860_4745070";
             // 
             // variblesSupportBox
             // 
@@ -164,32 +175,35 @@
             this.startButton.TabIndex = 11;
             this.startButton.Text = "Старт";
             this.startButton.UseVisualStyleBackColor = true;
-            // 
-            // attachmentsBox
-            // 
-            this.attachmentsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.attachmentsBox.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.attachmentsBox.Location = new System.Drawing.Point(6, 19);
-            this.attachmentsBox.Name = "attachmentsBox";
-            this.attachmentsBox.Size = new System.Drawing.Size(188, 183);
-            this.attachmentsBox.TabIndex = 4;
-            this.attachmentsBox.Text = "wall-194957860_212\nmarket-194957860_4745070";
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.sendedMessagesLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 338);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(541, 22);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // sendedMessagesLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(154, 17);
-            this.toolStripStatusLabel1.Text = "Отправлено сообщений: 0";
+            this.sendedMessagesLabel.Name = "sendedMessagesLabel";
+            this.sendedMessagesLabel.Size = new System.Drawing.Size(154, 17);
+            this.sendedMessagesLabel.Text = "Отправлено сообщений: 0";
+            // 
+            // stopButton
+            // 
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.stopButton.Location = new System.Drawing.Point(422, 307);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(107, 23);
+            this.stopButton.TabIndex = 13;
+            this.stopButton.Text = "Стоп";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Visible = false;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // Form1
             // 
@@ -197,6 +211,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(541, 360);
+            this.Controls.Add(this.stopButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.progressBar);
@@ -234,7 +249,8 @@
         private System.Windows.Forms.RichTextBox textBox;
         private System.Windows.Forms.RichTextBox attachmentsBox;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel sendedMessagesLabel;
+        private System.Windows.Forms.Button stopButton;
     }
 }
 
