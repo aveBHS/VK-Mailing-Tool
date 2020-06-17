@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Contracts;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using VkNet;
+using VkNet.Exception;
+using VkNet.Model;
+using VkNet.Model.RequestParams;
 
 namespace VK_Mailing_Tool
 {
     public partial class Form1 : Form
     {
 
-        Thread senderThread = new Thread(Sender);
-
+        Thread senderThread;
         public Form1()
         {
             InitializeComponent();
@@ -62,15 +58,66 @@ namespace VK_Mailing_Tool
             tokenBox.Enabled = false;
             messagesCountBox.Enabled = false;
             stopButton.Visible = true;
+            progressBar.Style = ProgressBarStyle.Marquee;
 
-            
+            senderThread = new Thread(Sender);
             senderThread.Start(args);
         }
 
-        public static void Sender(object args)
+        public void Sender(object args)
         {
             SenderParams @params = (SenderParams)args;
             int sendedMessagesCount = 0;
+
+            VkApi vk = new VkApi();
+            vk.Authorize(new ApiAuthParams
+                {
+                    AccessToken = @params.token
+                }
+            );
+
+            GetConversationsResult conv;
+            var getConvParams = new GetConversationsParams();
+            List<Conversation> conversations = new List<Conversation>();
+
+            Invoke(new Action(() => { statusLabel.Text = "Получение списка диалогов: 0"; }));
+
+            if (@params.messagesCount <= 200)
+            {
+                getConvParams.Count = (ulong) @params.messagesCount;
+                foreach(var conversation in vk.Messages.GetConversations(getConvParams).Items)
+                    conversations.Add(conversation.Conversation);
+                Invoke(new Action(() => { statusLabel.Text = $"Получение списка диалогов: {@params.messagesCount}"; }));
+            }
+            else
+            {
+                getConvParams.Count = 200;
+                conv = vk.Messages.GetConversations(getConvParams);
+                @params.messagesCount -= 200;
+                getConvParams.Offset = 200;
+
+                while (@params.messagesCount >= 200)
+                {
+                    int last_count = conversations.Count;
+                    foreach (var conversation in vk.Messages.GetConversations(getConvParams).Items)
+                        conversations.Add(conversation.Conversation);
+                    if (conversations.Count == last_count)
+                        break;
+                    @params.messagesCount -= 200;
+                    getConvParams.Offset += 200;
+                    Invoke(new Action(() => { statusLabel.Text = $"Получение списка диалогов: {conversations.Count}"; }));
+                }
+                if (@params.messagesCount != 0)
+                {
+                    getConvParams.Count = (ulong)@params.messagesCount;
+                    foreach (var conversation in vk.Messages.GetConversations(getConvParams).Items)
+                        conversations.Add(conversation.Conversation);
+                }
+                Invoke(new Action(() => { statusLabel.Text = $"Получение списка диалогов: {conversations.Count}"; }));
+            }
+
+            MessageBox.Show(conversations.Count.ToString());
+
         }
 
         private void stopButton_Click(object sender, EventArgs e)

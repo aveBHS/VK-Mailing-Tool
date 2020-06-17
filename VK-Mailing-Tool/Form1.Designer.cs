@@ -41,7 +41,7 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.startButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.sendedMessagesLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.stopButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -180,18 +180,17 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sendedMessagesLabel});
+            this.statusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 338);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(541, 22);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // sendedMessagesLabel
+            // statusLabel
             // 
-            this.sendedMessagesLabel.Name = "sendedMessagesLabel";
-            this.sendedMessagesLabel.Size = new System.Drawing.Size(154, 17);
-            this.sendedMessagesLabel.Text = "Отправлено сообщений: 0";
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // stopButton
             // 
@@ -249,7 +248,7 @@
         private System.Windows.Forms.RichTextBox textBox;
         private System.Windows.Forms.RichTextBox attachmentsBox;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel sendedMessagesLabel;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.Button stopButton;
     }
 }
