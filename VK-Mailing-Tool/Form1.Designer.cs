@@ -72,7 +72,7 @@
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(299, 238);
             this.textBox.TabIndex = 3;
-            this.textBox.Text = "Test message";
+            this.textBox.Text = "Привет, {first_name}!";
             // 
             // groupBox1
             // 
@@ -103,7 +103,7 @@
             this.attachmentsBox.Name = "attachmentsBox";
             this.attachmentsBox.Size = new System.Drawing.Size(188, 183);
             this.attachmentsBox.TabIndex = 4;
-            this.attachmentsBox.Text = "wall-194957860_212\nmarket-194957860_4745070";
+            this.attachmentsBox.Text = "";
             // 
             // variblesSupportBox
             // 
