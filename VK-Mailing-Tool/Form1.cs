@@ -7,6 +7,9 @@ using VkNet;
 using VkNet.Exception;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.Attachments;
+using System.Net;
+using System.Net.Http;
 
 namespace VK_Mailing_Tool
 {
@@ -116,14 +119,55 @@ namespace VK_Mailing_Tool
                 Invoke(new Action(() => { statusLabel.Text = $"Получение списка диалогов: {conversations.Count}"; }));
             }
 
-            MessageBox.Show(conversations.Count.ToString());
+            List<UserList> users = new List<UserList>();
+            if (@params.supportVaribles)
+            {
+                Invoke(new Action(() => { statusLabel.Text = $"Получение пользователей: 0 из {conversations.Count}"; }));
+                foreach (var conversation in conversations)
+                {
+                    var user = vk.Users.Get(new long[] { conversation.Peer.Id });
+                    users.Add(new UserList((int) conversation.Peer.Id, user[0]));
+                    Invoke(new Action(() => { statusLabel.Text = $"Получение пользователей: {users.Count} из {conversations.Count}"; }));
+                }
+            }
 
+            Invoke(new Action(() => { statusLabel.Text = $"Отправлено {sendedMessagesCount} из {conversations.Count}"; }));
+
+            string url = @"https://api.vk.com/method/messages.send?message={0}&user_id={1}&attachment={2}&access_token={3}&random_id=0&v=5.100";
+
+            foreach (var conversation in conversations)
+            {
+                HttpWebRequest client = (HttpWebRequest)WebRequest.Create(String.Format(url, @params.text, conversation.Peer.Id, @params.attachments, @params.token));
+                if (@params.supportVaribles)
+                {
+                    foreach (var user in users) 
+                    {
+                        if (user.id == conversation.Peer.Id)
+                        {
+                            string text = @params.text.Replace("{first_name}", user.user.FirstName);
+                            text = text.Replace("{last_name}", user.user.LastName);
+                            client = (HttpWebRequest)WebRequest.Create(String.Format(url, text, conversation.Peer.Id, @params.attachments, @params.token));
+                        }
+                    }
+                }
+                client.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0";
+                client.GetResponse();
+                sendedMessagesCount += 1;
+                Invoke(new Action(() => { statusLabel.Text = $"Отправлено {sendedMessagesCount} из {conversations.Count}"; }));
+                client.Abort();
+            }
+            MessageBox.Show("Рассылка завершена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Invoke(new Action(() => { activateGUI(); }));
+            Thread.CurrentThread.Abort();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
             senderThread.Abort();
-
+            activateGUI();
+        }
+        private void activateGUI()
+        {
             startButton.Visible = true;
             textBox.Enabled = true;
             attachmentsBox.Enabled = true;
@@ -131,6 +175,8 @@ namespace VK_Mailing_Tool
             tokenBox.Enabled = true;
             messagesCountBox.Enabled = true;
             stopButton.Visible = false;
+            progressBar.Style = ProgressBarStyle.Continuous;
+            progressBar.Value = 0;
         }
     }
     public class SenderParams
@@ -142,5 +188,16 @@ namespace VK_Mailing_Tool
         public bool supportVaribles;
 
         public SenderParams() { }
+    }
+    public class UserList
+    {
+        public int id;
+        public User user;
+
+        public UserList(int id, User user)
+        {
+            this.id = id;
+            this.user = user;
+        }
     }
 }

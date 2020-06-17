@@ -37,7 +37,6 @@
             this.variblesSupportBox = new System.Windows.Forms.CheckBox();
             this.messagesCountBox = new System.Windows.Forms.DomainUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.variblesSupportHelp = new System.Windows.Forms.LinkLabel();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.startButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -132,7 +131,7 @@
             this.messagesCountBox.Items.Add("2500");
             this.messagesCountBox.Items.Add("3000");
             this.messagesCountBox.Items.Add("4000");
-            this.messagesCountBox.Items.Add("Все");
+            this.messagesCountBox.Items.Add("5000");
             this.messagesCountBox.Location = new System.Drawing.Point(103, 252);
             this.messagesCountBox.Name = "messagesCountBox";
             this.messagesCountBox.Size = new System.Drawing.Size(109, 20);
@@ -147,17 +146,6 @@
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Кол-во человек:";
-            // 
-            // variblesSupportHelp
-            // 
-            this.variblesSupportHelp.AutoSize = true;
-            this.variblesSupportHelp.Location = new System.Drawing.Point(160, 279);
-            this.variblesSupportHelp.Name = "variblesSupportHelp";
-            this.variblesSupportHelp.Size = new System.Drawing.Size(52, 13);
-            this.variblesSupportHelp.TabIndex = 9;
-            this.variblesSupportHelp.TabStop = true;
-            this.variblesSupportHelp.Text = "Что это?";
-            this.variblesSupportHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.variblesSupportHelp_LinkClicked);
             // 
             // progressBar
             // 
@@ -214,7 +202,6 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.variblesSupportHelp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.messagesCountBox);
             this.Controls.Add(this.variblesSupportBox);
@@ -242,7 +229,6 @@
         private System.Windows.Forms.CheckBox variblesSupportBox;
         private System.Windows.Forms.DomainUpDown messagesCountBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.LinkLabel variblesSupportHelp;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.RichTextBox textBox;
