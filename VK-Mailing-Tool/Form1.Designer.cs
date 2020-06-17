@@ -28,13 +28,213 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.tokenBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox = new System.Windows.Forms.RichTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.variblesSupportBox = new System.Windows.Forms.CheckBox();
+            this.messagesCountBox = new System.Windows.Forms.DomainUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.variblesSupportHelp = new System.Windows.Forms.LinkLabel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.startButton = new System.Windows.Forms.Button();
+            this.attachmentsBox = new System.Windows.Forms.RichTextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // tokenBox
+            // 
+            this.tokenBox.Location = new System.Drawing.Point(101, 12);
+            this.tokenBox.Name = "tokenBox";
+            this.tokenBox.Size = new System.Drawing.Size(428, 20);
+            this.tokenBox.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Токен группы: ";
+            // 
+            // textBox
+            // 
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox.Location = new System.Drawing.Point(6, 19);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(299, 238);
+            this.textBox.TabIndex = 3;
+            this.textBox.Text = "Test message";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.textBox);
+            this.groupBox1.Location = new System.Drawing.Point(218, 38);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(311, 263);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Текст для рассылки";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.attachmentsBox);
+            this.groupBox2.Location = new System.Drawing.Point(12, 38);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 208);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Вложения";
+            // 
+            // variblesSupportBox
+            // 
+            this.variblesSupportBox.AutoSize = true;
+            this.variblesSupportBox.Location = new System.Drawing.Point(12, 278);
+            this.variblesSupportBox.Name = "variblesSupportBox";
+            this.variblesSupportBox.Size = new System.Drawing.Size(150, 17);
+            this.variblesSupportBox.TabIndex = 6;
+            this.variblesSupportBox.Text = "Поддержка переменных";
+            this.variblesSupportBox.UseVisualStyleBackColor = true;
+            // 
+            // messagesCountBox
+            // 
+            this.messagesCountBox.Items.Add("100");
+            this.messagesCountBox.Items.Add("200");
+            this.messagesCountBox.Items.Add("300");
+            this.messagesCountBox.Items.Add("400");
+            this.messagesCountBox.Items.Add("500");
+            this.messagesCountBox.Items.Add("600");
+            this.messagesCountBox.Items.Add("700");
+            this.messagesCountBox.Items.Add("800");
+            this.messagesCountBox.Items.Add("900");
+            this.messagesCountBox.Items.Add("1000");
+            this.messagesCountBox.Items.Add("1500");
+            this.messagesCountBox.Items.Add("2000");
+            this.messagesCountBox.Items.Add("2500");
+            this.messagesCountBox.Items.Add("3000");
+            this.messagesCountBox.Items.Add("4000");
+            this.messagesCountBox.Items.Add("Все");
+            this.messagesCountBox.Location = new System.Drawing.Point(103, 252);
+            this.messagesCountBox.Name = "messagesCountBox";
+            this.messagesCountBox.Size = new System.Drawing.Size(109, 20);
+            this.messagesCountBox.TabIndex = 7;
+            this.messagesCountBox.Text = "100";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 254);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Кол-во человек:";
+            // 
+            // variblesSupportHelp
+            // 
+            this.variblesSupportHelp.AutoSize = true;
+            this.variblesSupportHelp.Location = new System.Drawing.Point(160, 279);
+            this.variblesSupportHelp.Name = "variblesSupportHelp";
+            this.variblesSupportHelp.Size = new System.Drawing.Size(52, 13);
+            this.variblesSupportHelp.TabIndex = 9;
+            this.variblesSupportHelp.TabStop = true;
+            this.variblesSupportHelp.Text = "Что это?";
+            this.variblesSupportHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.variblesSupportHelp_LinkClicked);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(12, 307);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(404, 23);
+            this.progressBar.TabIndex = 10;
+            // 
+            // startButton
+            // 
+            this.startButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.startButton.Location = new System.Drawing.Point(422, 307);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(107, 23);
+            this.startButton.TabIndex = 11;
+            this.startButton.Text = "Старт";
+            this.startButton.UseVisualStyleBackColor = true;
+            // 
+            // attachmentsBox
+            // 
+            this.attachmentsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.attachmentsBox.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.attachmentsBox.Location = new System.Drawing.Point(6, 19);
+            this.attachmentsBox.Name = "attachmentsBox";
+            this.attachmentsBox.Size = new System.Drawing.Size(188, 183);
+            this.attachmentsBox.TabIndex = 4;
+            this.attachmentsBox.Text = "wall-194957860_212\nmarket-194957860_4745070";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 338);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(541, 22);
+            this.statusStrip1.TabIndex = 12;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(154, 17);
+            this.toolStripStatusLabel1.Text = "Отправлено сообщений: 0";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(541, 360);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.variblesSupportHelp);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.messagesCountBox);
+            this.Controls.Add(this.variblesSupportBox);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tokenBox);
+            this.Name = "Form1";
+            this.Text = "VK Mailing Tool";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox tokenBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox variblesSupportBox;
+        private System.Windows.Forms.DomainUpDown messagesCountBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel variblesSupportHelp;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.RichTextBox textBox;
+        private System.Windows.Forms.RichTextBox attachmentsBox;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

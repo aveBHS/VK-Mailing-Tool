@@ -16,5 +16,10 @@ namespace VK_Mailing_Tool
         {
             InitializeComponent();
         }
+
+        private void variblesSupportHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }
