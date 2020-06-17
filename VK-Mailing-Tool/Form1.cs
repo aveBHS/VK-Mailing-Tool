@@ -135,6 +135,8 @@ namespace VK_Mailing_Tool
 
             string url = @"https://api.vk.com/method/messages.send?message={0}&user_id={1}&attachment={2}&access_token={3}&random_id=0&v=5.100";
 
+            int procent = 100 / conversations.Count;
+            Invoke(new Action(() => { progressBar.Style = ProgressBarStyle.Continuous; }));
             foreach (var conversation in conversations)
             {
                 HttpWebRequest client = (HttpWebRequest)WebRequest.Create(String.Format(url, @params.text, conversation.Peer.Id, @params.attachments, @params.token));
@@ -155,7 +157,11 @@ namespace VK_Mailing_Tool
                 sendedMessagesCount += 1;
                 Invoke(new Action(() => { statusLabel.Text = $"Отправлено {sendedMessagesCount} из {conversations.Count}"; }));
                 client.Abort();
-            }
+                if (progressBar.Value + procent > 100)
+                    Invoke(new Action(() => { progressBar.Value = 100; }));
+                else
+                    Invoke(new Action(() => { progressBar.Value += procent; }));
+            }     
             MessageBox.Show("Рассылка завершена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Invoke(new Action(() => { activateGUI(); }));
             Thread.CurrentThread.Abort();

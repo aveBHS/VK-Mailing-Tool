@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tokenBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox = new System.Windows.Forms.RichTextBox();
@@ -209,6 +210,9 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tokenBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(557, 399);
+            this.MinimumSize = new System.Drawing.Size(557, 399);
             this.Name = "Form1";
             this.Text = "VK Mailing Tool";
             this.groupBox1.ResumeLayout(false);
