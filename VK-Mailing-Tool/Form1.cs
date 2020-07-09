@@ -79,7 +79,6 @@ namespace VK_Mailing_Tool
                 }
             );
 
-            GetConversationsResult conv;
             var getConvParams = new GetConversationsParams();
             List<Conversation> conversations = new List<Conversation>();
 
@@ -95,7 +94,8 @@ namespace VK_Mailing_Tool
             else
             {
                 getConvParams.Count = 200;
-                conv = vk.Messages.GetConversations(getConvParams);
+                foreach (var conversation in vk.Messages.GetConversations(getConvParams).Items)
+                    conversations.Add(conversation.Conversation);
                 @params.messagesCount -= 200;
                 getConvParams.Offset = 200;
 
@@ -123,11 +123,37 @@ namespace VK_Mailing_Tool
             if (@params.supportVaribles)
             {
                 Invoke(new Action(() => { statusLabel.Text = $"Получение пользователей: 0 из {conversations.Count}"; }));
+
+                List<long> user_ids = new List<long>();
                 foreach (var conversation in conversations)
                 {
-                    var user = vk.Users.Get(new long[] { conversation.Peer.Id });
-                    users.Add(new UserList((int) conversation.Peer.Id, user[0]));
-                    Invoke(new Action(() => { statusLabel.Text = $"Получение пользователей: {users.Count} из {conversations.Count}"; }));
+                    user_ids.Add(conversation.Peer.Id);
+                }
+
+                while (true)
+                {
+                    if (user_ids.Count <= 1000)
+                    {
+                        var usersArray = vk.Users.Get(user_ids.ToArray());
+                        foreach (var user in usersArray)
+                        {
+                            users.Add(new UserList((int)user.Id, user));
+                            Invoke(new Action(() => { statusLabel.Text = $"Получение пользователей: {users.Count} из {conversations.Count}"; }));
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        long[] cutArray = new long[1000];
+                        Array.Copy(user_ids.ToArray(), cutArray, 1000);
+                        var usersArray = vk.Users.Get(cutArray);
+                        foreach (var user in usersArray)
+                        {
+                            user_ids.Remove(user.Id);
+                            users.Add(new UserList((int)user.Id, user));
+                            Invoke(new Action(() => { statusLabel.Text = $"Получение пользователей: {users.Count} из {conversations.Count}"; }));
+                        }
+                    }
                 }
             }
 
